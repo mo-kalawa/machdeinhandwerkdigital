@@ -571,7 +571,7 @@
                                 </div>
                                 <div>
                                     <h5 class="font-semibold text-white mb-1">Standort</h5>
-                                    <p class="text-blue-200">Kassel, Deutschland</p>
+                                    <p class="text-blue-200">Berlin, Deutschland</p>
                                 </div>
                             </div>
                             
@@ -727,8 +727,8 @@
                         <div>
                             <h5 class="font-semibold text-charcoal mb-2">Anschrift</h5>
                             <p class="text-steel-gray">machdeinhandwerkdigital</p>
-                            <p class="text-steel-gray">Marie-Calm-Straße 29</p>
-                            <p class="text-steel-gray">34131 Kassel, Deutschland</p>
+                            <p class="text-steel-gray">Tieckstr. 24</p>
+                            <p class="text-steel-gray">10115 Berlin, Deutschland</p>
                         </div>
                         
                         <div>
@@ -933,19 +933,19 @@
         });
 
         // Auto-popup functionality for consultation
-        let scrollTimer = null;
-        let lastScrollTime = 0;
+        let clickTimer = null;
+        let firstClickDetected = false;
         let popupShown = false;
         
         function showConsultationPopup() {
-            if (popupShown) return; // Don't show if already shown recently
+            if (popupShown) return; // Don't show if already shown
             
             popupShown = true;
             
             const modal = document.createElement('div');
             modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
             modal.innerHTML = `
-                <div class="bg-white rounded-xl p-6 sm:p-8 max-w-md w-full mx-4 animate-pulse">
+                <div class="bg-white rounded-xl p-6 sm:p-8 max-w-md w-full mx-4">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-xl sm:text-2xl font-bold text-navy">🎯 Kostenlose Beratung!</h3>
                         <button class="text-gray-400 hover:text-gray-600 text-2xl" onclick="this.closest('.fixed').remove(); resetPopupTimer();">&times;</button>
@@ -1008,26 +1008,21 @@
         
         function resetPopupTimer() {
             popupShown = false;
-            lastScrollTime = Date.now();
+            firstClickDetected = false;
         }
         
-        // Track scrolling and show popup every 20 seconds of scrolling activity
-        window.addEventListener('scroll', function() {
-            const currentTime = Date.now();
-            lastScrollTime = currentTime;
-            
-            // Clear existing timer
-            if (scrollTimer) {
-                clearTimeout(scrollTimer);
+        // Track first click and show popup after 20 seconds
+        document.addEventListener('click', function() {
+            if (!firstClickDetected && !popupShown) {
+                firstClickDetected = true;
+                
+                // Set timer for 20 seconds after first click
+                clickTimer = setTimeout(function() {
+                    if (!popupShown) {
+                        showConsultationPopup();
+                    }
+                }, 20000); // 20 seconds
             }
-            
-            // Set new timer for 20 seconds
-            scrollTimer = setTimeout(function() {
-                // Only show if user has been scrolling and popup hasn't been shown recently
-                if (currentTime === lastScrollTime && !popupShown) {
-                    showConsultationPopup();
-                }
-            }, 20000); // 20 seconds
         });
 
         // Contact form functionality
@@ -1072,5 +1067,5 @@
             });
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9944b4e6c33339ce',t:'MTc2MTQyNjY4OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'994bc7c61281972a',t:'MTc2MTUwMDg2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
