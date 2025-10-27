@@ -912,6 +912,27 @@
                     
                     modal.querySelector('form').addEventListener('submit', function(e) {
                         e.preventDefault();
+                        
+                        // Get form data
+                        const name = document.getElementById('name').value;
+                        const email = document.getElementById('email').value;
+                        const phone = document.getElementById('phone').value;
+                        const business = document.getElementById('business').value;
+                        
+                        // Create email content
+                        const subject = 'Neue Beratungsanfrage von ' + name;
+                        const body = `Neue Beratungsanfrage:
+
+Name: ${name}
+E-Mail: ${email}
+Telefon: ${phone}
+Handwerksbetrieb: ${business || 'Nicht angegeben'}
+
+Diese Anfrage wurde über die Website gestellt.`;
+                        
+                        // Open email client
+                        window.open(`mailto:machdeinhandwerkdigital@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+                        
                         // Show success message
                         modal.innerHTML = `
                             <div class="bg-white rounded-xl p-6 sm:p-8 max-w-md w-full mx-4 text-center">
@@ -988,6 +1009,27 @@
             
             modal.querySelector('form').addEventListener('submit', function(e) {
                 e.preventDefault();
+                
+                // Get form data
+                const name = document.getElementById('popup-name').value;
+                const email = document.getElementById('popup-email').value;
+                const phone = document.getElementById('popup-phone').value;
+                const business = document.getElementById('popup-business').value;
+                
+                // Create email content
+                const subject = 'Neue Beratungsanfrage (Auto-Popup) von ' + name;
+                const body = `Neue Beratungsanfrage über Auto-Popup:
+
+Name: ${name}
+E-Mail: ${email}
+Telefon: ${phone}
+Handwerksbetrieb: ${business || 'Nicht angegeben'}
+
+Diese Anfrage wurde über das automatische Popup auf der Website gestellt.`;
+                
+                // Open email client
+                window.open(`mailto:machdeinhandwerkdigital@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+                
                 // Show success message
                 modal.innerHTML = `
                     <div class="bg-white rounded-xl p-6 sm:p-8 max-w-md w-full mx-4 text-center">
@@ -1042,6 +1084,25 @@
                     message: document.getElementById('contact-message').value
                 };
                 
+                // Create email content
+                const subject = 'Neue Kontaktanfrage von ' + formData.name + ' ' + formData.lastname;
+                const serviceText = formData.service ? document.querySelector(`#contact-service option[value="${formData.service}"]`).textContent : 'Nicht angegeben';
+                const body = `Neue Kontaktanfrage über die Website:
+
+Name: ${formData.name} ${formData.lastname}
+E-Mail: ${formData.email}
+Telefon: ${formData.phone || 'Nicht angegeben'}
+Handwerksbetrieb: ${formData.business || 'Nicht angegeben'}
+Interessiert an: ${serviceText}
+
+Nachricht:
+${formData.message}
+
+Diese Anfrage wurde über das Hauptkontaktformular gestellt.`;
+                
+                // Open email client
+                window.open(`mailto:machdeinhandwerkdigital@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+                
                 // Show success message
                 const successModal = document.createElement('div');
                 successModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
@@ -1067,5 +1128,5 @@
             });
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'994bc7c61281972a',t:'MTc2MTUwMDg2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'995027856234e5a3',t:'MTc2MTU0NjcyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
